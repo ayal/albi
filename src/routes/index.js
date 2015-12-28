@@ -12,10 +12,9 @@ import AboutView from 'views/AboutView'
 
 export default (
   <Route path='/' component={CoreLayout}>
-    <IndexRoute component={HomeView} />
+    <IndexRoute component={AlbumsView} />
 	<Route path='/about' component={AboutView} />
-	<Route path='/albi' component={AlbumsView} />
 	<Route path='/albi/' component={AlbumsView} />
-	<Route path='/albi/dist/' component={AlbumsView} />
+	<Route path='/albi' component={AlbumsView} />
   </Route>
 )
