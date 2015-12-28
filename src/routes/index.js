@@ -15,6 +15,7 @@ export default (
     <IndexRoute component={HomeView} />
 	<Route path='/about' component={AboutView} />
 	<Route path='/albi' component={AlbumsView} />
+	<Route path='/albi/' component={AlbumsView} />
 	<Route path='/albi/dist/' component={AlbumsView} />
   </Route>
 )
