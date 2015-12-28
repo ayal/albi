@@ -1,0 +1,28 @@
+import { createAction, handleActions } from 'redux-actions'
+
+// ------------------------------------
+// Constants
+// ------------------------------------
+export const FETCH_ALBUMS = 'FETCH_ALBUMS'
+
+// ------------------------------------
+// Actions
+// ------------------------------------
+export const fetch = createAction(FETCH_ALBUMS, (term) => [])
+
+export const doubleAsync = () => {
+  return (dispatch, getState) => {
+  }
+}
+
+export const actions = {
+  increment,
+  doubleAsync
+}
+
+// ------------------------------------
+// Reducer
+// ------------------------------------
+export default handleActions({
+  [COUNTER_INCREMENT]: (state, { payload }) => state + payload
+}, 1)
