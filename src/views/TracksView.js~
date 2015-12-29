@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
-import { actions as albumActions } from '../redux/modules/albums'
+import { actions as trackActions } from '../redux/modules/tracks'
 import styles from './AlbumsView.scss'
 
 // We define mapStateToProps where we'd normally use
@@ -48,9 +48,6 @@ export class AlbumView extends React.Component {
 	this.setState({text:this.refs.input.value});
     }
 
-    chooseAlbum(album){
-	this.props.history.pushState(null, location.pathname + 'tracks', {album: album.collectionName, artist: album.artistName});
-    }
     
     componentDidMount(){
 	this.refetch.bind(this)();
@@ -63,7 +60,7 @@ export class AlbumView extends React.Component {
 	}
 
 	var squares = this.props.albums.payload.results.map((r) => {
-	    return (<div className="album" onClick={this.chooseAlbum.bind(this, r)} >
+	    return (<div className="album">
 		    <img src={r.artworkUrl100} />
 		    <div className="text">
 		    {r.collectionName}
@@ -77,15 +74,6 @@ export class AlbumView extends React.Component {
 		<input value={this.state ? this.state.text : ''} ref='input' onKeyPress={this.search.bind(this)} onChange={this.change.bind(this)} />
 		</div>
 		<div className="albums">
-		<div className="all">
-		
-		<div className="album" onClick={this.chooseAlbum.bind(this, {})} >
-		<div className="text">
-		All tracks
-	        </div>
-		</div>
-		
-		</div>
 		{squares ? squares : 'loading..'}
 	    </div>
 		</div>

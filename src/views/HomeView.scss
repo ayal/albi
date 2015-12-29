@@ -1,8 +1,8 @@
 .counter {
-  font-weight: bold;
+    font-weight: bold;
 }
 
 .counter--green {
-  composes: counter;
-  color: rgb(25,200,25);
+    composes: counter;
+    color: rgb(25,200,25);
 }

@@ -6,15 +6,13 @@ import { Route, IndexRoute } from 'react-router'
 // very easy to navigate to files regardless of how deeply nested
 // your current file is.
 import CoreLayout from 'layouts/CoreLayout'
-import HomeView from 'views/HomeView'
 import AlbumsView from 'views/AlbumsView'
-import AboutView from 'views/AboutView'
+import TracksView from 'views/TracksView'
 
 export default (
   <Route path='/' component={CoreLayout}>
     <IndexRoute component={AlbumsView} />
-	<Route path='/about' component={AboutView} />
 	<Route path='/albi/' component={AlbumsView} />
-	<Route path='/albi' component={AlbumsView} />
+	<Route path='/albi/tracks' component={TracksView} />
   </Route>
 )

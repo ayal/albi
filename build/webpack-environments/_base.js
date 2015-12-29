@@ -35,18 +35,16 @@ const webpackConfig = {
     new webpack.DefinePlugin(config.globals),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.DedupePlugin(),
-
-      new HtmlWebpackPlugin({
-	  template: paths.base('index.html'),
-	  hash: false,
-	  favicon: paths.client('static/favicon.ico'),
-	  filename: 'index.html',
-	  inject: 'body',
-	  minify: {
-              collapseWhitespace: false
-	  }
+    new HtmlWebpackPlugin({
+      template: paths.client('index.html'),
+      hash: false,
+      favicon: paths.client('static/favicon.ico'),
+      filename: 'index.html',
+      inject: 'body',
+      minify: {
+        collapseWhitespace: true
+      }
     }),
-      
     new webpack.ProvidePlugin(config.compiler_globals)
   ],
   resolve: {
