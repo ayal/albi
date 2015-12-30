@@ -1,7 +1,19 @@
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import { actions as albumActions } from '../redux/modules/albums'
+import pitchfork_albums from '../../postpitch'
+
+
 import styles from './AlbumsView.scss'
+
+import GridList from 'material-ui/lib/grid-list/grid-list';
+import GridTile from 'material-ui/lib/grid-list/grid-tile';
+import AppBar from 'material-ui/lib/app-bar';
+import IconButton from 'material-ui/lib/icon-button';
+import Search from 'material-ui/lib/svg-icons/action/search';
+
+
+
 
 // We define mapStateToProps where we'd normally use
 // the @connect decorator so the data requirements are clear upfront, but then
@@ -20,6 +32,8 @@ export class AlbumView extends React.Component {
     }
     
     refetch(props) {
+	return;
+	
 	var props = props || this.props;
 	const {location: {query: {term}}} = props;
 	this.props.fetchAsync(term);
@@ -49,7 +63,7 @@ export class AlbumView extends React.Component {
     }
 
     chooseAlbum(album){
-	this.props.history.pushState(null, location.pathname + 'tracks', {album: album.collectionName, artist: album.artistName});
+	this.props.history.pushState(null, location.pathname, {album: album.collectionName, artist: album.artistName});
     }
     
     componentDidMount(){
@@ -57,36 +71,32 @@ export class AlbumView extends React.Component {
     }
 
     render () {
-	console.log('rendering album view', this.props, this.state);
-	if (!this.props.albums || !this.props.albums.payload) {
-	    return (<div>loading...</div>);
-	}
-
-	var squares = this.props.albums.payload.results.map((r) => {
-	    return (<div className="album" onClick={this.chooseAlbum.bind(this, r)} >
-		    <img src={r.artworkUrl100} />
-		    <div className="text">
-		    {r.collectionName}
-		    </div>
-		    </div>)
+	console.log('rendering album view', this.props, this.state, pitchfork_albums.length);
+	var squares = pitchfork_albums.sort((a,b)=>(new Date(b.releaseDate) - new Date(a.releaseDate))).map((r) => {
+	    var cyear = new Date(r.releaseDate).getFullYear();
+	    return (
+		    <GridTile onClick={this.chooseAlbum.bind(this, r)} title={r.collectionName} subtitle={r.artistName}><img src={r.artworkUrl100.replace('100x100','200x200')} />
+		    <div className={styles['year']}>{cyear}</div>
+		    </GridTile>
+	    )
 	});
 	
 	return (
-		<div className="container">
+		<div className="" style={{width:350,height:window.innerHeight - 320, overflow:'auto'}}>
+		<AppBar
+	    title="Albi"
+	    iconElementLeft={<IconButton><Search /></IconButton>}
+	    iconClassNameRight="muidocs-icon-navigation-expand-more"
+		/>
 		<div>
-		<input value={this.state ? this.state.text : ''} ref='input' onKeyPress={this.search.bind(this)} onChange={this.change.bind(this)} />
 		</div>
 		<div className="albums">
-		<div className="all">
+		<GridList cellHeight={160}
+	    style={{width: 320, height: 640, overflowY: 'auto'}}>
 		
-		<div className="album" onClick={this.chooseAlbum.bind(this, {})} >
-		<div className="text">
-		All tracks
-	        </div>
-		</div>
-		
-		</div>
 		{squares ? squares : 'loading..'}
+	    </GridList>
+		
 	    </div>
 		</div>
 	);

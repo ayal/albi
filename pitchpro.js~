@@ -1,0 +1,15 @@
+import fetchp from 'fetch-jsonp'
+import pitchfork_albums from '../../pitchfork_albums'
+
+var newobj = [];
+pitchfork_albums.forEach(function(album,i){
+    if (i === 0) {
+    	fetchp("//itunes.apple.com/search?term=" + album.album + "&limit=25&media=music&entity=album").then(
+	    albums => albums.json().then((data) => {
+		console.log(data)
+	    }),
+	    error => console.log('fetch error')
+	);
+    }
+
+})

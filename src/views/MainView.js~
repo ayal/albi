@@ -1,0 +1,26 @@
+import { connect } from 'react-redux'
+import styles from './AlbumsView.scss'
+
+import GridList from 'material-ui/lib/grid-list/grid-list';
+import GridTile from 'material-ui/lib/grid-list/grid-tile';
+import AppBar from 'material-ui/lib/app-bar';
+import IconButton from 'material-ui/lib/icon-button';
+import Search from 'material-ui/lib/svg-icons/action/search';
+
+const mapStateToProps = (state) => ({
+  albums: state.albums
+})
+export class MainView extends React.Component {
+    constructor(props, context) {
+	super(props, context)
+    }
+    
+    render () {
+	
+	return (
+		<div>Main View</div>
+	)
+  }
+}
+
+export default connect(mapStateToProps, albumActions)(AlbumView)
