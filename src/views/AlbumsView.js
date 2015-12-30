@@ -82,10 +82,9 @@ export class AlbumView extends React.Component {
 	});
 	
 	return (
-		<div className="" style={{width:350,height:window.innerHeight - 320, overflow:'auto'}}>
+		<div className="" style={{width:320,height:window.innerHeight - 320, overflow:'auto'}}>
 		<AppBar
 	    title="Albi"
-	    iconElementLeft={<IconButton><Search /></IconButton>}
 	    iconClassNameRight="muidocs-icon-navigation-expand-more"
 		/>
 		<div>
