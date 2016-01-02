@@ -8,8 +8,12 @@ import styles from './AlbumsView.scss'
 
 import GridList from 'material-ui/lib/grid-list/grid-list';
 import GridTile from 'material-ui/lib/grid-list/grid-tile';
+
 import AppBar from 'material-ui/lib/app-bar';
 import IconButton from 'material-ui/lib/icon-button';
+import Arrow from 'material-ui/lib/svg-icons/navigation/arrow-back';
+
+
 import Search from 'material-ui/lib/svg-icons/action/search';
 
 
@@ -82,16 +86,16 @@ export class AlbumView extends React.Component {
 	});
 	
 	return (
-		<div className="" style={{width:320,height:window.innerHeight - 320, overflow:'auto'}}>
+		<div className="" style={{width:320,height:window.innerHeight - 200, overflow:'auto'}}>
 		<AppBar
 	    title="Albi"
-	    iconClassNameRight="muidocs-icon-navigation-expand-more"
+
 		/>
 		<div>
 		</div>
 		<div className="albums">
 		<GridList cellHeight={160}
-	    style={{width: 320, height: 640, overflowY: 'auto'}}>
+	    style={{width: 320, overflowY: 'auto'}}>
 		
 		{squares ? squares : 'loading..'}
 	    </GridList>

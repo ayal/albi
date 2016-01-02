@@ -12,7 +12,7 @@ x.forEach(function(album,i){
 	    x => x.json().then(data => {
 		var results = data.results;
 		if (results && results.length) {
-		    if(results[0].collectionName === album.album) {
+		    if(results[0].collectionName === album.album.split('|').slice(-1)[0] ) {
 			newobj.push(results[0]);
 		    }
 		}
@@ -25,6 +25,6 @@ x.forEach(function(album,i){
 
 setTimeout(function(){
     console.log(JSON.stringify(newobj))
-},15000)
+},60000)
 
 

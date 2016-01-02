@@ -2,6 +2,10 @@ import { connect } from 'react-redux'
 import AlbumsView from 'views/AlbumsView'
 import TracksView from 'views/TracksView'
 import { actions as mainActions } from '../redux/modules/main'
+import SocialNotificationsActive from 'material-ui/lib/svg-icons/social/notifications-active';
+import PlayArrow from 'material-ui/lib/svg-icons/av/play-arrow';
+
+
 
 window.softclean = function(e, t) {
     return e.replace(/\./gim,'').replace(/"/gim, '').replace(/:/gim, '').split('ft')[0].split(' - ')[0];
@@ -225,7 +229,7 @@ export class MainView extends React.Component {
             window.playerobj = new YT.Player('player', {
 		playerVars: { 'autoplay': 1},
 		width: 320,
-		height:320,
+		height:200,
 		'videoId': id,
 		events: {
 		    'onReady': onPlayerReady,
@@ -291,14 +295,13 @@ export class MainView extends React.Component {
 	    })
     }
 
-
     
     render () {
 	console.log('rendering main view', this.props, this.state)
 	var body = this.props.location.query.album ?  <TracksView {...this.state} chooseTrack={this.chooseTrack.bind(this)} {...this.props} /> : <AlbumsView {...this.props} />;  
 	return (
-	    	<div className="container" style={{width:350}}>
-	    	<div className="player" style={{minHeight:320,background:'black'}}>
+	    	<div className="container" style={{width:320,padding:0}}>
+	    	<div className="player" style={{minHeight:200,background:'black',position:'relative'}}>
 		<div id="player" />
 		</div>
 	    {body}

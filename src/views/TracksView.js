@@ -7,6 +7,11 @@ import List from 'material-ui/lib/lists/list';
 import Divider from 'material-ui/lib/divider';
 import ListItem from 'material-ui/lib/lists/list-item';
 
+import AppBar from 'material-ui/lib/app-bar';
+import IconButton from 'material-ui/lib/icon-button';
+import Arrow from 'material-ui/lib/svg-icons/navigation/arrow-back';
+
+
 // We define mapStateToProps where we'd normally use
 // the @connect decorator so the data requirements are clear upfront, but then
 // export the decorated component after the main class definition so
@@ -59,12 +64,19 @@ export class TracksView extends React.Component {
 	var filterArtist = this.props.location.query.artist || '';
 
 	var index = -1;
-	var squares = this.props.tracks.payload.results.sort(function(a,b){return a.trackNumber - b.trackNumber}).map((r) => {
+	var res = this.props.tracks.payload.results.sort(function(a,b){return a.trackNumber - b.trackNumber});
+	var squares = res.map((r,i) => {
 
 	    if (!r.artistName) {
 		return null;
 	    }
+
+
+	    if (res[i + 1] && res[i + 1].trackName === r.trackName) {
+		return null;
+	    }
 	    index++;
+
 	    if (r.collectionName.toLowerCase().indexOf(filterAlbum.toLowerCase()) !== -1 &&
 		r.artistName.toLowerCase().indexOf(filterArtist.toLowerCase()) !== -1) {
 		var trackclass = (that.props.track && that.props.track.index === index) ? styles['track--selected'] : '';
@@ -82,8 +94,12 @@ export class TracksView extends React.Component {
 	});
 	
 	return (
-		<div className="" style={{height:window.innerHeight - 320, overflow:'auto'}}>
+		<div className="" style={{height:window.innerHeight - 200, overflow:'auto'}}>
 		
+		<AppBar
+	    title="Albi"
+	    iconElementLeft={<IconButton onClick={() => {console.log(this.props.history.goBack())} }><Arrow /></IconButton>}
+		/>
 
 
 		<div className="tracks">
